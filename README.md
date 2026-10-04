@@ -150,3 +150,12 @@ Util-linux instructions deliberately disable. You do not need to rebuild
 Util-linux to address that error. Argument quoting and all bundled shell
 scripts were checked; this revision still has not been installed or boot-tested
 on LFS.
+
+### Wget bootstrap and Libidn2
+
+The bootstrap now replaces the ineffective `--without-libidn2` option with
+`--disable-iri`. Wget 1.25.0 otherwise leaves its IRI source enabled,
+causing `fatal error: idn2.h: No such file or directory` on clean LFS. The
+bootstrap downloader uses ASCII URLs and retains HTTPS certificate verification.
+Download the revised installer and checksum and rerun with the same `--user`
+value; the failed bootstrap step is retried.
